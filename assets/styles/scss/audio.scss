@@ -1,0 +1,461 @@
+.__audio_player {
+	.__listing_overlay {
+		top        : 0;
+		left       : 0;
+		right      : 0;
+		bottom     : 85px;
+		opacity    : 0;
+		overflow   : hidden;
+		position   : fixed;
+		transform  : translateY(100%);
+		transition : all 0.2s ease-in;
+	}
+
+	&.open {
+		.__listing_overlay {
+			opacity   : 1;
+			transform : translateY(0%);
+		}
+	}
+
+	.__track_filters_wrap {
+		top        : 0;
+		left       : 0;
+		right      : 0;
+		z-index    : 1;
+		padding    : 20px;
+		position   : fixed;
+		box-shadow : 0 0 15px rgba(0, 0, 0, 0.1);
+
+		@media all and (min-width : 960px) {
+			height       : 100%;
+			position     : static;
+			overflow     : auto;
+			box-shadow   : none;
+			border-right : 1px solid #e5e5e5;
+		}
+
+		.__track_filters {
+			.facetwp-facet {
+				margin : 0;
+			}
+
+			.facetwp-counter {
+				display : none;
+			}
+
+			.fs-wrap {
+				color   : #191919;
+				width   : auto;
+				display : block;
+			}
+
+			.fs-dropdown {
+				left  : 20px;
+				right : 20px;
+				width : auto;
+			}
+
+			.facetwp-checkbox {
+				margin  : 0;
+				padding : 5px 0 5px 20px;
+
+				&:hover,
+				&.checked {
+					color : #2fb0c4;
+				}
+			}
+
+			.facetwp-search-wrap {
+				display : block;
+			}
+
+			.facetwp-btn {
+				top       : 50%;
+				transform : translateY(-50%);
+				right     : 10px;
+			}
+
+			.facetwp-search {
+				display     : block;
+				width       : 100%;
+				box-sizing  : border-box;
+				height      : 30px;
+				border      : 1px solid #e1e1e1;
+				padding     : 5px 10px;
+				font-size   : 14px;
+				font-family : Poppins, serif;
+				font-weight : 500;
+			}
+
+			@media all and (min-width : 960px) {
+				.facetwp-search {
+					height        : 40px;
+					border-radius : 50px;
+					padding       : 5px 20px;
+				}
+			}
+		}
+
+		@media all and (min-width : 960px) {
+			.__track_filter_search {
+				background    : #f8f8f8;
+				margin        : -20px -20px 0;
+				padding       : 20px;
+				border-bottom : 1px solid #e1e1e1;
+			}
+		}
+
+		.__fav_checkbox {
+			label {
+				width            : 37px;
+				height           : 17px;
+				display          : inline-block;
+				position         : relative;
+				border-radius    : 50px;
+				background-color : #677294;
+
+				&:after {
+					top              : 0;
+					left             : 0;
+					width            : 13px;
+					height           : 13px;
+					content          : '';
+					position         : absolute;
+					transform        : translateX(3px) translateY(2px);
+					transition       : transform .2s ease-in;
+					border-radius    : 50px;
+					background-color : #ffffff;
+				}
+			}
+
+			input[type='checkbox'] {
+				top       : 0;
+				left      : 0;
+				opacity   : 0;
+				position  : absolute;
+				transform : translateX(-50px);
+
+				&:checked + label {
+					border-color     : #2fb0c4;
+					background-color : #2fb0c4;
+
+					&:after {
+						transform : translateX(21px) translateY(2px);
+					}
+
+				}
+			}
+		}
+	}
+
+	.__track_items_wrap {
+		overflow    : auto;
+		height      : 100%;
+		padding-top : 113px;
+
+		@media all and (min-width : 960px) {
+			padding-top  : 0;
+			border-right : 1px solid #e5e5e5;
+		}
+
+		.__track_items {
+			.__track_item {
+				cursor        : pointer;
+				padding       : 15px;
+				transition    : background-color .2s ease-in;
+				border-bottom : 1px solid #e5e5e5;
+
+				@media all and (min-width : 1600px) {
+					border-right : 1px solid #e5e5e5;
+
+					&:nth-child(even) {
+						border-right : 0;
+					}
+				}
+
+				.__track_icon {
+					display          : none;
+					background-color : rgba(0, 0, 0, 0.6);
+
+					svg {
+						width : 24px;
+					}
+				}
+
+				&:hover,
+				&.__item_active {
+					background : rgba(0, 0, 0, 0.05);
+				}
+
+				&.__item_active {
+					.__track_icon {
+						display : block;
+					}
+				}
+
+				.__track_artwork {
+					max-width : 50px;
+				}
+
+				.__track_favorite {
+					span {
+						color            : #2fb0c4;
+						border           : none;
+						background-color : transparent;
+					}
+
+					&.__active {
+						span {
+							color : #2fb0c4;
+
+							path {
+								fill : #2fb0c4;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.__track_preview_wrap {
+		height   : 100%;
+		overflow : auto;
+		position : relative;
+
+		.__track_preview_close {
+			top         : 5px;
+			right       : 5px;
+			color       : #ffffff;
+			width       : 30px;
+			height      : 30px;
+			position    : absolute;
+			text-align  : center;
+			line-height : 30px;
+			background  : #191919;
+		}
+
+		.__track_buy {
+		}
+
+		.__track_favorite {
+			color            : #2fb0c4;
+			border           : none;
+			background-color : transparent;
+
+			&.__active {
+				color : #2fb0c4;
+
+				path {
+					fill : #2fb0c4;
+				}
+			}
+		}
+	}
+
+	.facetwp-facet-track_pager {
+		margin     : 0;
+		text-align : center;
+
+		.facetwp-load-more {
+			color            : #ffffff;
+			border           : none;
+			cursor           : pointer;
+			margin           : 30px 0 25px;
+			padding          : 0 22px;
+			font-size        : 16px;
+			text-align       : center;
+			transition       : .1s ease-in-out;
+			appearance       : none;
+			font-family      : 'Poppins', Arial, serif;
+			line-height      : 40px;
+			font-weight      : 700;
+			border-radius    : 3px;
+			vertical-align   : middle;
+			text-transform   : uppercase;
+			background-color : #191919;
+		}
+	}
+
+	.__audio_controls {
+		left     : 0;
+		right    : 0;
+		bottom   : 0;
+		position : fixed;
+
+		.__player_progress {
+			cursor           : pointer;
+			position         : relative;
+			background-color : #e5e5e5;
+
+			.__player_track_bar {
+				height   : 10px;
+				cursor   : pointer;
+				z-index  : 2;
+				display  : block;
+				opacity  : 0;
+				position : relative;
+			}
+
+			.__player_current_progress {
+				top              : 0;
+				left             : 0;
+				width            : 0%;
+				height           : 10px;
+				z-index          : 1;
+				position         : absolute;
+				background-color : #2fb0c4;
+			}
+		}
+
+		.__track_artwork {
+			width   : 75px;
+			height  : 75px;
+			display : block;
+
+			@media all and (min-width : 960px) {
+				width : 150px;
+			}
+
+			.uk-overlay-primary {
+				transition       : background-color 0.2s ease-in;
+				background-color : rgba(0, 0, 0, 0.6);
+
+				&:hover {
+					background-color : rgba(0, 0, 0, 0.8);
+				}
+			}
+		}
+
+		.__player_spinner {
+			top        : 50%;
+			left       : 50%;
+			width      : 55px;
+			color      : #2fb0c4;
+			height     : 55px;
+			opacity    : 0;
+			z-index    : 1;
+			position   : absolute;
+			transform  : translate3d(-50%, -50%, 0) scale(0);
+			transition : all 0.2s ease-in;
+
+			svg {
+				width : 55px;
+			}
+
+			circle {
+				stroke-width : 1.3px !important;
+			}
+		}
+
+		.__player_actions {
+			padding-right : 15px;
+
+			@media all and (min-width : 960px) {
+				padding-right : 0px;
+			}
+
+			a {
+				color      : #191919;
+				margin     : 0 5px;
+				display    : block;
+				transition : all .2s ease-in;
+
+				&:hover,
+				&.__active {
+					color : #2fb0c4;
+				}
+
+				img,
+				svg {
+					max-width : 16px;
+				}
+			}
+		}
+
+		.__player_action_play_pause {
+			position : relative;
+
+			a {
+				color            : #ffffff;
+				width            : 50px;
+				z-index          : 2;
+				position         : relative;
+				text-align       : center;
+				line-height      : 50px;
+				border-radius    : 50px;
+				background-color : #2d2e33;
+
+				&:hover {
+					color            : #ffffff;
+					background-color : #2fb0c4;
+				}
+
+				&.__player_action_pause {
+					display : none;
+				}
+
+				img,
+				svg {
+					transform : translate3d(1px, -1px, 0);
+				}
+			}
+		}
+
+		// playing state styles
+		&.__playing {
+			.__player_action_play_pause {
+				// hide play button
+				.__player_action_play {
+					display : none;
+				}
+
+				.__player_action_pause {
+					display : block;
+				}
+			}
+		}
+
+		&.__loading {
+			.__player_spinner {
+				opacity   : 1;
+				transform : translate3d(-50%, -50%, 0) scale(1);
+			}
+		}
+	}
+}
+
+.__player_expanded {
+	overflow : hidden;
+}
+
+.__track_filter_search_mobile {
+	background    : #f8f8f8;
+	padding       : 20px;
+	border-bottom : 1px solid #e1e1e1;
+
+	.facetwp-search-wrap {
+		display : block;
+	}
+
+	.facetwp-btn {
+		top       : 50%;
+		transform : translateY(-50%);
+		right     : 10px;
+	}
+
+	.facetwp-search {
+		display       : block;
+		width         : 100%;
+		box-sizing    : border-box;
+		border        : 1px solid #e1e1e1;
+		font-size     : 14px;
+		font-family   : Poppins, serif;
+		font-weight   : 500;
+		height        : 40px;
+		border-radius : 50px;
+		padding       : 5px 20px;
+	}
+}
+
